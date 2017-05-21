@@ -11,7 +11,8 @@ public:
 private:
 	static bool IsExiting();
 	static void GameLoop();
-
+	static void showSplashScreen();
+	static void showMenu();
 	enum GameState { uninitialised, showingSplash, paused, showingMenu, playing, exiting };
 
 	static GameState _gameState; 

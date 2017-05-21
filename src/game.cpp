@@ -1,6 +1,9 @@
 
 #include "stdafx.hpp"
 #include "game.hpp"
+#include "splashScreen.hpp"
+#include "mainMenu.hpp"
+#include <iostream>
 
 void Game::Start(void)
 {
@@ -8,7 +11,7 @@ void Game::Start(void)
     return;
 
   _mainWindow.create(sf::VideoMode(1024,768,32),"Pang!");
-  _gameState = Game::playing;
+  _gameState = Game::showingSplash;
   
   while(!IsExiting())
   {
@@ -28,25 +31,60 @@ bool Game::IsExiting()
 
 void Game::GameLoop()
 {
-  sf::Event currentEvent;
-  while(_mainWindow.pollEvent(currentEvent))
-  {
   
     switch(_gameState)
     {
-      case Game::playing:
-        {
-          _mainWindow.clear(sf::Color(255,0,0));
-          _mainWindow.display();
-        
-          if(currentEvent.type == sf::Event::Closed)
-            {
-              _gameState = Game::exiting;
-            }
-          break;
-        }
-    }
-  }
+
+	    case Game::showingMenu:
+	    {
+	    	showMenu();
+	      	break;
+	    }
+	    case Game::showingSplash:
+	    {
+	    	showSplashScreen();
+	      	break;
+	    }
+		case Game::playing:
+		{
+			sf::Event currentEvent;
+			while(_mainWindow.pollEvent(currentEvent)){
+				_mainWindow.clear(sf::Color(40,0,0));
+				_mainWindow.display();
+
+				if(currentEvent.type == sf::Event::Closed){
+				  	_gameState = Game::exiting;
+				}
+			      if(currentEvent.type == sf::Event::KeyPressed)
+			      {
+
+					//     	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+						_gameState = Game::showingMenu;
+
+					// // }
+
+					   	 }
+			}
+			break;
+	    }
+	}
+}
+void Game::showSplashScreen(){
+	splashScreen mySplashScreen;
+	mySplashScreen.show(_mainWindow);
+	_gameState = Game::showingMenu;
+}
+void Game::showMenu(){
+	mainMenu myMainMenu;
+	mainMenu::menuResult result = myMainMenu.show(_mainWindow);
+	switch(result){
+		case mainMenu::Exit:
+			_gameState = Game::exiting;
+			break;
+		case mainMenu::Play:
+			_gameState = Game::playing;
+			break;
+	}
 }
 
 
