@@ -2,6 +2,7 @@
 #pragma once 
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
+#include "playerPaddle.hpp"
 
 class Game{
 
@@ -17,6 +18,7 @@ private:
 
 	static GameState _gameState; 
 	static sf::RenderWindow _mainWindow;
+	static playerPaddle _player1;
 
 };
 
