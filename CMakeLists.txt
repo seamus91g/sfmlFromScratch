@@ -9,7 +9,15 @@ project(sfmlTut)
 ### g++ sfmlTut1.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system 		# Alternative: Make command 
 
 #################### Source files 
-set(SOURCES src/pang.cpp src/game.cpp src/stdafx.cpp src/splashScreen.cpp src/mainMenu.cpp src/visibleGameObject.cpp src/playerPaddle.cpp)	# Source files
+set(SOURCES 
+	src/pang.cpp 
+	src/game.cpp 
+	src/stdafx.cpp 
+	src/splashScreen.cpp 
+	src/mainMenu.cpp 
+	src/visibleGameObject.cpp 
+	src/playerPaddle.cpp 
+	src/gameObjectManager.cpp)	# Source files
 #################### 
 # Environment check 
 # Find required components from SFML libraries 

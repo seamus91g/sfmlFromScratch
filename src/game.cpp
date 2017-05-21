@@ -13,8 +13,13 @@ void Game::Start(void)
   _mainWindow.create(sf::VideoMode(1024,768,32),"Pang!");
   _gameState = Game::showingSplash;
 
-  _player1.load("../media/paddle.png");
-  _player1.setPosition((1024/2)-45, 700-25);
+  // _player1.load("../media/paddle.png");
+  // _player1.setPosition((1024/2)-45, 700-25);
+  playerPaddle *player1 = new playerPaddle();
+  player1->load("../media/paddle.png");
+  player1->setPosition((1024/2)-45, 675);
+
+  _gameObjectManager.add("Paddle1", player1);
   
   while(!IsExiting())
   {
@@ -53,7 +58,7 @@ void Game::GameLoop()
 			sf::Event currentEvent;
 			while(_mainWindow.pollEvent(currentEvent)){
 				_mainWindow.clear(sf::Color(40,0,0));
-				_player1.draw(_mainWindow);
+				_gameObjectManager.drawAll(_mainWindow);
 				_mainWindow.display();
 
 				if(currentEvent.type == sf::Event::Closed){
@@ -93,4 +98,4 @@ void Game::showMenu(){
 
 Game::GameState Game::_gameState = uninitialised;
 sf::RenderWindow Game::_mainWindow;
-playerPaddle Game::_player1;
+gameObjectManager Game::_gameObjectManager;
