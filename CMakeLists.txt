@@ -5,6 +5,8 @@ if(NOT CMAKE_BUILD_TYPE)	# If build type is not defined, set to Debug
   set(CMAKE_BUILD_TYPE Debug CACHE STRING "Setting build type to Debug")
 endif()
 project(sfmlTut)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ### g++ sfmlTut1.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system 		# Alternative: Make command 
 
@@ -30,6 +32,7 @@ if (WIN32)
 	link_directories(${SFML_ROOT}/lib)			# Location of static libraries 
 	set(CMAKE_MODULE_PATH ${SFML_ROOT}/cmake/Modules ${CMAKE_MODULE_PATH})
 	find_package(SFML 2 REQUIRED COMPONENTS window system graphics)		# The order matters ... ??  :-/
+
 else ()
 	message("== Configuring for a *nix environment ==")
 	set(SFML_LIBRARIES sfml-graphics sfml-window sfml-system)

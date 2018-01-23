@@ -7,26 +7,24 @@
 
 void Game::Start(void)
 {
-  if(_gameState != uninitialised)	// Ensure Game::Start is only called once 
-    return;
+	if(_gameState != uninitialised){	// Ensure Game::Start is only called once 
+	  return;		// Throw an error instead of quietly returning? 
+	}
 
-  _mainWindow.create(sf::VideoMode(1024,768,32),"Pang!");
-  _gameState = Game::showingSplash;
+	_mainWindow.create(sf::VideoMode(Game::SCREEN_WIDTH,Game::SCREEN_HEIGHT,32),"Pang!");
+	_gameState = Game::showingSplash;
 
-  // _player1.load("../media/paddle.png");
-  // _player1.setPosition((1024/2)-45, 700-25);
-  playerPaddle *player1 = new playerPaddle();
-  player1->load("../media/paddle.png");
-  player1->setPosition((1024/2)-45, 675);
+	playerPaddle *player1 = new playerPaddle();
+	player1->setPosition((Game::SCREEN_WIDTH/2), Game::SCREEN_HEIGHT-30);
 
-  _gameObjectManager.add("Paddle1", player1);
-  
-  while(!IsExiting())
-  {
-    GameLoop();
-  }
+	_gameObjectManager.add("Paddle1", player1);
+	
+	while(!IsExiting())
+	{
+	  GameLoop();
+	}
 
-  _mainWindow.close();
+	_mainWindow.close();
 }
 
 bool Game::IsExiting()

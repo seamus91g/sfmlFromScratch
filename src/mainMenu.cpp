@@ -10,7 +10,7 @@ mainMenu::menuResult mainMenu::show(sf::RenderWindow& window){
 
 	//// Declare clickable regions
 
-	// Play menu item coordinates
+	// Play menu item coordinates	// TODO: Encapsulate the below functionality 
 	menuItem playButton;
 	playButton.rect.top = 145;
 	playButton.rect.height = (380 - 145);

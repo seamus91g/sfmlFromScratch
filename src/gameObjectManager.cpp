@@ -26,7 +26,7 @@ void gameObjectManager::remove(std::string name){
 }
 
 
-
+// TODO: Use smart pointer 
 visibleGameObject* gameObjectManager::get(std::string name) const{
 	std::map<std::string, visibleGameObject*>::const_iterator results = _gameObjects.find(name);
 	if(results == _gameObjects.end()){
@@ -46,5 +46,12 @@ void gameObjectManager::drawAll(sf::RenderWindow& renderWindow){
 		++itr;
 	}
 }
-
+void gameObjectManager::updateAll(){
+	std::map<std::string, visibleGameObject*>::const_iterator itr = _gameObjects.begin();
+	float timeDelta = clock.restart().asSeconds();
+	while(itr != _gameObjects.end()){
+		itr->second->update(timeDelta);
+		++itr;
+	}
+}
 

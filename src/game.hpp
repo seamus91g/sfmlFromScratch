@@ -10,6 +10,9 @@ class Game{
 public:
 	static void Start();
 
+	const static int SCREEN_WIDTH = 800;
+	const static int SCREEN_HEIGHT = 600;
+
 private:
 	static bool IsExiting();
 	static void GameLoop();
@@ -19,7 +22,6 @@ private:
 
 	static GameState _gameState; 
 	static sf::RenderWindow _mainWindow;
-	// static playerPaddle _player1;
 	static gameObjectManager _gameObjectManager;
 
 };

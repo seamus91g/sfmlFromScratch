@@ -1,5 +1,6 @@
 #include "stdafx.hpp"
 #include "splashScreen.hpp"
+#include "game.hpp"
 
 void splashScreen::show(sf::RenderWindow & renderWindow)
 {
@@ -11,7 +12,10 @@ void splashScreen::show(sf::RenderWindow & renderWindow)
   }
 
   sf::Sprite sprite(image);
-  
+
+  // Scale the splash screen image to the size of the window 
+  auto size = sprite.getTexture()->getSize();
+  sprite.setScale(float(Game::SCREEN_WIDTH)/size.x, float(Game::SCREEN_HEIGHT)/size.y);
   renderWindow.draw(sprite);
   renderWindow.display();
 
