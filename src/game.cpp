@@ -1,10 +1,6 @@
 
 #include "stdafx.hpp"
 #include "game.hpp"
-#include "splashScreen.hpp"
-#include "mainMenu.hpp"
-#include <iostream>
-
 void Game::Start(void)
 {
 	if(_gameState != uninitialised){	// Ensure Game::Start is only called once 
@@ -14,10 +10,15 @@ void Game::Start(void)
 	_mainWindow.create(sf::VideoMode(Game::SCREEN_WIDTH,Game::SCREEN_HEIGHT,32),"Pang!");
 	_gameState = Game::showingSplash;
 
+	gameBall *ball = new gameBall();
+	ball->setPosition((Game::SCREEN_WIDTH/2),(Game::SCREEN_HEIGHT/2)-15);
+	
 	playerPaddle *player1 = new playerPaddle();
 	player1->setPosition((Game::SCREEN_WIDTH/2), Game::SCREEN_HEIGHT-30);
 
+
 	_gameObjectManager.add("Paddle1", player1);
+	_gameObjectManager.add("Ball", ball);
 	
 	while(!IsExiting())
 	{
@@ -26,18 +27,30 @@ void Game::Start(void)
 
 	_mainWindow.close();
 }
+sf::RenderWindow& Game::getWindow()
+{
+	return _mainWindow;
+}
+
+const sf::Event& Game::getInput() 
+{
+	sf::Event currentEvent;
+	_mainWindow.pollEvent(currentEvent);
+	return currentEvent;
+}
 
 bool Game::IsExiting()
 {
-  if(_gameState == Game::exiting) 
-    return true;
-  else 
-    return false;
+if(_gameState == Game::exiting) 
+	return true;
+else 
+	return false;
 }
 
 void Game::GameLoop()
 {
-  
+  	sf::Event currentEvent;
+  	_mainWindow.pollEvent(currentEvent);
     switch(_gameState)
     {
 
@@ -53,23 +66,21 @@ void Game::GameLoop()
 	    }
 		case Game::playing:
 		{
-			sf::Event currentEvent;
-			while(_mainWindow.pollEvent(currentEvent)){
-				_mainWindow.clear(sf::Color(40,0,0));
-				_gameObjectManager.drawAll(_mainWindow);
-				_mainWindow.display();
+			// sf::Event currentEvent;
+			_mainWindow.clear(sf::Color(40,0,0));
+			_gameObjectManager.updateAll();
+			_gameObjectManager.drawAll(_mainWindow);
+			_mainWindow.display();
 
+			while(_mainWindow.pollEvent(currentEvent)){
 				if(currentEvent.type == sf::Event::Closed){
 				  	_gameState = Game::exiting;
 				}
-			      if(currentEvent.type == sf::Event::KeyPressed)
-			      {
-			      	if(currentEvent.key.code == sf::Keyboard::Escape){
-			      		showMenu();
-			      	}
-
-
-			   	 	}
+				if(currentEvent.type == sf::Event::KeyPressed)				{
+					if(currentEvent.key.code == sf::Keyboard::Escape){
+						showMenu();
+					}
+				}
 			}
 			break;
 	    }

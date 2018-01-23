@@ -2,13 +2,19 @@
 #pragma once 
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
-#include "playerPaddle.hpp"
+#include "gameBall.hpp"
 #include "gameObjectManager.hpp"
+#include "splashScreen.hpp"
+#include "mainMenu.hpp"
+#include "playerPaddle.hpp"
+
 
 class Game{
 
 public:
 	static void Start();
+	static sf::RenderWindow& getWindow();
+	const static sf::Event& getInput();
 
 	const static int SCREEN_WIDTH = 800;
 	const static int SCREEN_HEIGHT = 600;

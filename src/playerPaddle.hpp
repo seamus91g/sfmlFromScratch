@@ -1,6 +1,7 @@
 
 #pragma once
 #include "visibleGameObject.hpp"
+#include "game.hpp"
 
 class playerPaddle: public visibleGameObject{
 public:

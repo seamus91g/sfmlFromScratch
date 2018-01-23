@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SOURCES 
 	src/pang.cpp 
 	src/game.cpp 
+	src/gameBall.cpp 
 	src/stdafx.cpp 
 	src/splashScreen.cpp 
 	src/mainMenu.cpp 

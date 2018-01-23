@@ -1,7 +1,6 @@
 
 #include "stdafx.hpp"
 #include "playerPaddle.hpp"
-#include "game.hpp"
 
 playerPaddle::playerPaddle() : _velocity(0), _maxVelocity(600.0f){
 	load("../media/paddle.png");
