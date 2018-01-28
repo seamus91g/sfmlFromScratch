@@ -7,6 +7,8 @@
 #include "splashScreen.hpp"
 #include "mainMenu.hpp"
 #include "playerPaddle.hpp"
+#include "SFMLSoundProvider.hpp"
+#include "serviceLocator.hpp"
 
 
 class Game{
@@ -15,6 +17,7 @@ public:
 	static void Start();
 	static sf::RenderWindow& getWindow();
 	const static sf::Event& getInput();
+	const static gameObjectManager& getGameObjectManager();
 
 	const static int SCREEN_WIDTH = 800;
 	const static int SCREEN_HEIGHT = 600;

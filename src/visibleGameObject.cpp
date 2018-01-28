@@ -49,3 +49,14 @@ bool visibleGameObject::isLoaded() const{
 sf::Sprite& visibleGameObject::getSprite(){
 	return _sprite;
 }
+
+float visibleGameObject::getHeight() const{
+	return _sprite.getLocalBounds().height;
+}
+float visibleGameObject::getWidth() const{
+	return _sprite.getLocalBounds().width;
+}
+sf::Rect<float> visibleGameObject::getBoundingRect() const{
+	// return _sprite.getLocalBounds();
+	return _sprite.getGlobalBounds();
+}

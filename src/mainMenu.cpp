@@ -1,5 +1,7 @@
 #include "stdafx.hpp"
 #include "mainMenu.hpp"
+#include "SFMLSoundProvider.hpp"
+#include "serviceLocator.hpp"
 
 mainMenu::menuResult mainMenu::show(sf::RenderWindow& window){
 
@@ -67,6 +69,9 @@ mainMenu::menuResult  mainMenu::getMenuResponse(sf::RenderWindow& window)
     {
       if(menuEvent.type == sf::Event::MouseButtonPressed)
       {
+      	if(serviceLocator::getAudio()->isSongPlaying()){
+      		serviceLocator::getAudio()->stopAllSounds();
+      	}
         return handleClick(menuEvent.mouseButton.x,menuEvent.mouseButton.y);
       }
       if(menuEvent.type == sf::Event::Closed)

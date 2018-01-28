@@ -7,6 +7,11 @@ void Game::Start(void)
 	  return;		// Throw an error instead of quietly returning? 
 	}
 
+	SFMLSoundProvider soundProvider; 
+	serviceLocator::registerServiceLocator(&soundProvider);
+
+	serviceLocator::getAudio()->playSong("../media/audio/Soundtrack.ogg", true);
+
 	_mainWindow.create(sf::VideoMode(Game::SCREEN_WIDTH,Game::SCREEN_HEIGHT,32),"Pang!");
 	_gameState = Game::showingSplash;
 
@@ -45,6 +50,10 @@ if(_gameState == Game::exiting)
 	return true;
 else 
 	return false;
+}
+
+const gameObjectManager& Game::getGameObjectManager(){
+	return Game::_gameObjectManager;
 }
 
 void Game::GameLoop()

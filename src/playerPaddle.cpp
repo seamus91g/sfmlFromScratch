@@ -1,6 +1,7 @@
 
 #include "stdafx.hpp"
 #include "playerPaddle.hpp"
+// #include <iostream>
 
 playerPaddle::playerPaddle() : _velocity(0), _maxVelocity(600.0f){
 	load("../media/paddle.png");
@@ -37,9 +38,9 @@ void playerPaddle::update(float elapsedTime){
 	}
 
 	sf::Vector2f position = this->getPosition();
-
-	if(position.x < getSprite().getLocalBounds().width/2 
-		|| position.x > (Game::SCREEN_WIDTH - getSprite().getLocalBounds().width/2)){
+	// std::cout << "Velocity: " << _velocity << ", position x: " << position.x << std::endl;
+	if(  (position.x < getSprite().getLocalBounds().width/2 && _velocity < 0)
+		|| (position.x > (Game::SCREEN_WIDTH - getSprite().getLocalBounds().width/2) && _velocity > 0)){
 		_velocity = -_velocity;
 	}
 
