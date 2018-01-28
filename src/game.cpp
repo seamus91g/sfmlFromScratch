@@ -20,9 +20,11 @@ void Game::Start(void)
 	
 	playerPaddle *player1 = new playerPaddle();
 	player1->setPosition((Game::SCREEN_WIDTH/2), Game::SCREEN_HEIGHT-30);
-
+	AIPaddle *player2 = new AIPaddle();
+	player2->setPosition((Game::SCREEN_WIDTH/2), 30);
 
 	_gameObjectManager.add("Paddle1", player1);
+	_gameObjectManager.add("Paddle2", player2);
 	_gameObjectManager.add("Ball", ball);
 	
 	while(!IsExiting())

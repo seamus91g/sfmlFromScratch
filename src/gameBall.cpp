@@ -55,26 +55,31 @@ void gameBall::update(float elapsedTime) //Parameter is the time since last fram
 		_elapsedTimeSinceStart = 0.0f;
 	}
 
+	std::vector<visibleGameObject*> gPaddles;
 	playerPaddle* player1 = dynamic_cast<playerPaddle*>(Game::getGameObjectManager().get("Paddle1"));
-	if(player1 != NULL)	{
-		sf::Rect<float> p1RecBounds = player1->getBoundingRect();
-		sf::Rect<float> ballRecBounds = getBoundingRect();
-	
-		if(p1RecBounds.intersects(ballRecBounds))       //(GetPosition().x + moveByX + (GetSprite().GetSize().x /2),GetPosition().y + (GetSprite().GetSize().y /2) + moveByY))
-		{ 
-
-			// std::cout << "Intersected! " << std::endl;
-			// std::cout << "p1RecBounds = {" << p1RecBounds.left << ", " << p1RecBounds.top << "}" << std::endl << "ballRecBounds = {" << ballRecBounds.left << ", " << ballRecBounds.top << "}" << std::endl;
-			_angle =  360.0f - (_angle - 180.0f);
-			if(_angle > 360.0f) _angle -= 360.0f;
+	AIPaddle* player2 = dynamic_cast<AIPaddle*>(Game::getGameObjectManager().get("Paddle2"));
+	gPaddles.push_back(player1);
+	gPaddles.push_back(player2);
+	for(std::vector<visibleGameObject*>::iterator it=gPaddles.begin(); it!=gPaddles.end(); ++it){
+		if(*it != NULL)	{
+			sf::Rect<float> p1RecBounds = (*it)->getBoundingRect();
+			sf::Rect<float> ballRecBounds = getBoundingRect();
 		
-			moveByY = -moveByY;
+			if(p1RecBounds.intersects(ballRecBounds))       //(GetPosition().x + moveByX + (GetSprite().GetSize().x /2),GetPosition().y + (GetSprite().GetSize().y /2) + moveByY))
+			{ 
+				// std::cout << "Intersected! " << std::endl;
+				// std::cout << "p1RecBounds = {" << p1RecBounds.left << ", " << p1RecBounds.top << "}" << std::endl << "ballRecBounds = {" << ballRecBounds.left << ", " << ballRecBounds.top << "}" << std::endl;
+				_angle =  360.0f - (_angle - 180.0f);
+				if(_angle > 360.0f) _angle -= 360.0f;
+			
+				moveByY = -moveByY;
 
-			_velocity += 5.0f;
-			serviceLocator::getAudio()->playSound("../media/audio/Bounce.wav");
+				_velocity += 5.0f;
+				serviceLocator::getAudio()->playSound("../media/audio/Bounce.wav");
+			}
 		}
 	}
-		getSprite().move(moveByX,moveByY);
+	getSprite().move(moveByX,moveByY);
 }
 
 float gameBall::linearVelocityX(float angle)

@@ -7,6 +7,7 @@
 #include "splashScreen.hpp"
 #include "mainMenu.hpp"
 #include "playerPaddle.hpp"
+#include "AIPaddle.hpp"
 #include "SFMLSoundProvider.hpp"
 #include "serviceLocator.hpp"
 

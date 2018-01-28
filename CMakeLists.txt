@@ -20,6 +20,8 @@ set(SOURCES
 	src/playerPaddle.cpp 
 	src/SFMLSoundProvider.cpp 
 	src/serviceLocator.cpp 
+	src/soundFileCache.cpp 
+	src/AIPaddle.cpp 
 	src/gameObjectManager.cpp)	# Source files
 ####################
 # Find includes 
