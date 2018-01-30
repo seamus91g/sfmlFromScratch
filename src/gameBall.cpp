@@ -14,9 +14,7 @@ gameBall::gameBall() : _velocity(270.0f), _elapsedTimeSinceStart(0.0f){
 }
 
 gameBall::~gameBall(){
-
 }
-
 
 void gameBall::update(float elapsedTime) //Parameter is the time since last frame in seconds. VERY small number.
 {
@@ -71,8 +69,23 @@ void gameBall::update(float elapsedTime) //Parameter is the time since last fram
 				// std::cout << "p1RecBounds = {" << p1RecBounds.left << ", " << p1RecBounds.top << "}" << std::endl << "ballRecBounds = {" << ballRecBounds.left << ", " << ballRecBounds.top << "}" << std::endl;
 				_angle =  360.0f - (_angle - 180.0f);
 				if(_angle > 360.0f) _angle -= 360.0f;
-			
-				moveByY = -moveByY;
+				
+				// if top/bottom collision.  
+				if (ballRecBounds.top < p1RecBounds.top || (ballRecBounds.top + ballRecBounds.height) > (p1RecBounds.top + ballRecBounds.height)){
+					// -Y
+					std::cout << "top/bottom collision! " << std::endl;
+					moveByY = -moveByY;
+				}
+				// if side collision
+					// -X
+				if ((ballRecBounds.left + ballRecBounds.width/2) < p1RecBounds.left || (ballRecBounds.left + ballRecBounds.width/2) > (p1RecBounds.left + p1RecBounds.width)){
+					// -Y
+					_angle =  360.0f - (_angle);
+					if(_angle > 360.0f) _angle -= 360.0f;
+					std::cout << "side collision! " << std::endl;
+					std::cout << "b.left, width: " << ballRecBounds.left << ", " << ballRecBounds.width << " | p.left, p.width: " << p1RecBounds.left << ", " << p1RecBounds.width << std::endl; 
+					moveByX = -moveByX;
+				}
 
 				_velocity += 5.0f;
 				serviceLocator::getAudio()->playSound("../media/audio/Bounce.wav");

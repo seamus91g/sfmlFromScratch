@@ -103,6 +103,7 @@ void Game::showSplashScreen(){
 	_gameState = Game::showingMenu;
 }
 void Game::showMenu(){
+	_mainWindow.clear(sf::Color(0,40,0));
 	mainMenu myMainMenu;
 	mainMenu::menuResult result = myMainMenu.show(_mainWindow);
 	switch(result){
