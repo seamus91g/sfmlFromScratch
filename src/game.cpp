@@ -89,7 +89,9 @@ void Game::GameLoop()
 				}
 				if(currentEvent.type == sf::Event::KeyPressed)				{
 					if(currentEvent.key.code == sf::Keyboard::Escape){
-						showMenu();
+
+						_gameState = Game::showingMenu;
+						// showMenu();
 					}
 				}
 			}
@@ -107,14 +109,27 @@ void Game::showMenu(){
 	mainMenu myMainMenu;
 	mainMenu::menuResult result = myMainMenu.show(_mainWindow);
 	switch(result){
-		case mainMenu::Exit:
+		case mainMenu::menuResult::Exit:
 			_gameState = Game::exiting;
 			break;
-		case mainMenu::Play:
+		case mainMenu::menuResult::Continue:
 			_gameState = Game::playing;
 			break;
 	}
 }
+// void Game::showEnd(){
+// 	_mainWindow.clear(sf::Color(0,0,40));
+// 	mainMenu myMainMenu;
+// 	mainMenu::menuResult result = myMainMenu.show(_mainWindow);
+// 	switch(result){
+// 		case mainMenu::Exit:
+// 			_gameState = Game::exiting;
+// 			break;
+// 		case mainMenu::Play:
+// 			_gameState = Game::playing;
+// 			break;
+// 	}
+// }
 
 
 Game::GameState Game::_gameState = uninitialised;

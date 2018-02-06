@@ -24,8 +24,7 @@ void splashScreen::show(sf::RenderWindow & renderWindow)
   {
     while(renderWindow.pollEvent(event))
     {
-      if(event.type == sf::Event::KeyPressed 
-        || event.type == sf::Event::MouseButtonPressed
+      if( event.type == sf::Event::MouseButtonPressed
         || event.type == sf::Event::Closed )
       {
         return;		// Return and move on to show splash screen next 

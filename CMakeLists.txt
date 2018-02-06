@@ -10,12 +10,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #################### Source files 
 set(SOURCES 
+	src/IMenu.cpp 
+	src/mainMenu.cpp 
 	src/pang.cpp 
 	src/game.cpp 
 	src/gameBall.cpp 
 	src/stdafx.cpp 
 	src/splashScreen.cpp 
-	src/mainMenu.cpp 
 	src/visibleGameObject.cpp 
 	src/playerPaddle.cpp 
 	src/SFMLSoundProvider.cpp 

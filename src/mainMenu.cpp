@@ -53,14 +53,14 @@ mainMenu::menuResult mainMenu::show(sf::RenderWindow& window){
 	playButton.rect.height = (Game::SCREEN_HEIGHT)/4;
 	playButton.rect.left = 0;
 	playButton.rect.width = Game::SCREEN_WIDTH;
-	playButton.action = Play;
+	playButton.action = menuResult::Continue;
 
 	menuItem exitButton;
 	exitButton.rect.top = ((Game::SCREEN_HEIGHT)/4)*2;
 	exitButton.rect.height = (Game::SCREEN_HEIGHT)/4;
 	exitButton.rect.left = 0;
 	exitButton.rect.width = Game::SCREEN_WIDTH;
-	exitButton.action = Exit;
+	exitButton.action = menuResult::Exit;
 
 	_menuItems.push_back(playButton);
 	_menuItems.push_back(exitButton);
@@ -72,26 +72,6 @@ mainMenu::menuResult mainMenu::show(sf::RenderWindow& window){
 	menuResult returnChoice = getMenuResponse(window);
 	return returnChoice;
 
-}
-
-
-mainMenu::menuResult mainMenu::handleClick(int x, int y){
-	std::list<menuItem>::iterator it;
-
-	// Loop through all menu items to detect which was clicked 
-	for ( it = _menuItems.begin(); it != _menuItems.end(); it++){	
-		sf::Rect<int> menuItemRect = (*it).rect;
-		if(menuItemRect.height + menuItemRect.top > y 
-			&& menuItemRect.top < y 
-			&& menuItemRect.left < x 
-			&& menuItemRect.width + menuItemRect.left > x)
-		{
-			return ((*it).action);
-		}
-
-	}
-
-	return Nothing;	// If not clicked on any menu item 
 }
 
 mainMenu::menuResult  mainMenu::getMenuResponse(sf::RenderWindow& window)
@@ -112,7 +92,7 @@ mainMenu::menuResult  mainMenu::getMenuResponse(sf::RenderWindow& window)
       }
       if(menuEvent.type == sf::Event::Closed)
       {
-        return Exit;
+        return menuResult::Exit;
       }
     }
   }
